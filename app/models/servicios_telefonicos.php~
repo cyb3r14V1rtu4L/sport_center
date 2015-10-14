@@ -1,0 +1,12 @@
+<?php
+
+    class UnidadesEnServicio extends AppModel{
+    
+	var $name = 'UnidadesEnServicio';
+	var $useTable = "unidades_en_servicio";
+	var $primaKey = 'id';
+// 	var $validate = array('id' => array('rule' => 'notEmpty'),'number_formula' => array('rule' => 'notEmpty'),'algebra_description' => array('rule' => 'notEmpty'),'description' => array('rule' => 'notEmpty'));
+
+	
+    }
+?>

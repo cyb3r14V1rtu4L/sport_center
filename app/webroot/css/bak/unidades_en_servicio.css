@@ -1,0 +1,59 @@
+
+#action_menu{
+
+/* 	background-image: url(../img/backgrounds/Solid_Aqua_Graphite.png ); */
+
+
+	background: url("../img/backgrounds/background-for-computer-1754340676.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding-bottom:6px;
+	border:1px solid #ddd;
+	border-radius: 8px;
+	margin-top:5px;
+	margin-bottom:5px;
+/* 	color: #003d4c; */
+	color:white;
+	padding-top:5px;
+	font-weight:bold;
+	padding-left:10px;
+/* 	width:100%; */
+} 
+
+
+
+
+#action_menu_img{ 
+
+/* 	margin-top:5px; */
+	padding:4px;
+	display:inline;
+}
+
+li.action_menu{
+  display:inline;
+}
+
+#action_menu_date{
+  text-align:right;
+}
+
+#menu_info{
+	color:#666;
+/* 	background:#57a700 url(../img/icons/form_heading.gif) repeat-x; */
+	padding: 2px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom:1px solid #ddd;
+	border-radius: 8px;
+	border-color:red;
+}
+
+input.in_buscar{
+/*   clear:both; */
+/*   display:inline; */
+/*   width:300px; */
+/*   float:right; */
+}
