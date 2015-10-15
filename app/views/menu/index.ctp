@@ -84,4 +84,16 @@
 </div>
 <script>
 $('a').tooltip();
+<script>
+require(['jquery', 'bootstrap','scripts','tooltip','tab','datepicker','Sticky','masked','jquery_min','jquery_ui','combogrid'], function($) { // <--- Aqui llamamos a la libreria junto con jquery y bootstrap
+    $(document).ready(function () {
+        $(function() {
+            $('#log_in_button').click(function(){
+                loginForm();
+                return false;
+            });
+            
+        });
+    });
+});
 </script>
