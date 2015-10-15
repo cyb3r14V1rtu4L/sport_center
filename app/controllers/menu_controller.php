@@ -7,6 +7,7 @@ class MenuController extends AppController {
     var $uses = array("Clientes");
     
     function index($act = 'index') {
+        $_SESSION['refresh']='';
         switch ($act)
         {
             case 1:

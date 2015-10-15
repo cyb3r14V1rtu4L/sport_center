@@ -1,3 +1,16 @@
+<head>
+    <meta HTTP-EQUIV="Expires" content="0" > 
+    <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <?php
+    if($_SESSION['refresh']==''){
+    ?>
+    <META HTTP-EQUIV="Refresh" CONTENT="1; url=<?php e($html->url())?>">
+        <META HTTP-EQUIV="Refresh" CONTENT="3; url=<?php e($html->url())?>"> 
+    <?php 
+        $_SESSION['refresh'] = '1';
+    }
+    ?>
+</head>
 <?php
 e($ajax->form(array("type"=>"post",                  
                     "options"=>array("id"=>"customers",
@@ -244,3 +257,4 @@ e($ajax->form(array("type"=>"post",
 </div>
 <?php 
 e($form->end());
+?>

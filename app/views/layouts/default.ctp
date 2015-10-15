@@ -1,8 +1,7 @@
 <?php
 date_default_timezone_set('America/Mexico_City');
 ?>
-<!DOCTYPE html>
-<html lang="es">
+
 <head>
   <?php echo $this->Html->charset();?>
   <title><?php echo $title_for_layout?></title>
@@ -56,9 +55,9 @@ date_default_timezone_set('America/Mexico_City');
             'datepicker': "<?php e($this->webroot.'js/jquery.datetimepicker');?>",
             'tab': "<?php e($this->webroot.'js/tab');?>",
             'Sticky': "<?php e($this->webroot.'js/sticky.full');?>",
-            'masked': "<?php e($this->webroot.'js/jquery.maskedinput.min');?>",
+            //'masked': "<?php e($this->webroot.'js/jquery.maskedinput.min');?>",
             //comboGrid
-            'jquery':"<?php e($this->webroot.'js/devoops/autocomplete/jquery/jquery-1.9.1.min');?>",
+            'jquery':"<?php e($this->webroot.'js/devoops/autocomplete/jquery/jquery-2.1.4');?>",
             'jquery_ui': "<?php e($this->webroot.'js/devoops/autocomplete/jquery/jquery-ui-1.10.1.custom.min');?>",
             'combogrid': "<?php e($this->webroot.'js/devoops/autocomplete/plugin/jquery.ui.combogrid-1.6.3');?>"
 		},
@@ -108,7 +107,7 @@ date_default_timezone_set('America/Mexico_City');
     ?>
 </head>
 
-<body>
+<body >
     <?php 
     $link = (isset($_SESSION['Auth']['User']['id'])) ? 'logout' : 'login' ;
     ?>
@@ -267,7 +266,7 @@ date_default_timezone_set('America/Mexico_City');
         <?php //echo $this->element('sql_dump'); ?>
     </div>
 </body>
-</html>
+
 
 <script>
 require(['jquery', 'bootstrap','scripts','tooltip','tab','datepicker','Sticky','masked','jquery_min','jquery_ui','combogrid'], function($) { // <--- Aqui llamamos a la libreria junto con jquery y bootstrap
