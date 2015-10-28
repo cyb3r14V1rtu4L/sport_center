@@ -4,9 +4,7 @@ function preAction(section,f0cus)
     jQuery('html,body,div').animate({
         scrollTop:jQuery(section).offset().top
         },2000);
-    jQuery(f0cus).focus();
-
-		
+    jQuery(f0cus).focus();	
 }
 
 function loginForm()
@@ -103,14 +101,14 @@ if(d.valant != d.value){
 			}
 		}
 	}
-	val = ''
+	val = '';
 	val3 = new Array();
 	for(s=0; s<pat.length; s++){
 		val3[s] = val2.substring(0,pat[s]);
 		val2 = val2.substr(pat[s]);
 	}
 	for(q=0;q<val3.length; q++){
-		if(q ==0){
+		if(q === 0){
 			val = val3[q];
 		}
 		else{
@@ -123,75 +121,54 @@ if(d.valant != d.value){
 	d.valant = val;
 	}
 }
-
-function autoComplete(){
-
-    /*console.log( data ); // Data returned
-      console.log( textStatus ); // Success
-      console.log( jqxhr.status ); // 200
-      console.log( "Load was performed." );
-
-    jQuery.getScript("../../app/webroot/js/devoops/autocomplete/jquery/jquery-1.9.1.min.js", function( data, textStatus, jqxhr ) {         
-    });
-    jQuery.getScript("../../app/webroot/js/devoops/autocomplete/jquery/jquery-ui-1.10.1.custom.min.js", function( data, textStatus, jqxhr ) {
-    });
-
-    jQuery.getScript("../../app/webroot/js/devoops/autocomplete/plugin/jquery.ui.combogrid-1.6.3.js", function( data, textStatus, jqxhr ) {
-    });*/
-}
-
-
-
-function autoCompleteCiudades(){
-    autoComplete();
-    jQuery( "#ciudad" ).combogrid({
-		url: '../../app/webroot/files/world.php',
-		debug:true,
-        delay: 5, 
-        //replaceNull: true,
-		colModel: [{'columnName':'idCiudades','width':'10','label':'ID'}, {'columnName':'Ciudad','width':'60','label':'Ciudad'},{'columnName':'Paises_Codigo','width':'30','label':'Codigo'}],
-		select: function( event, ui ) {
-			jQuery( "#ciudad" ).val( ui.item.Ciudad );
-            jQuery( "#ciudad_id" ).val( ui.item.idCiudades );
-			return false;
-		}
-	});
-}
-
-function autoCompleteEstados(){
-    autoComplete();
-    jQuery( "#estado" ).combogrid({
-		url: '../../app/webroot/files/world.php',
-		debug:true,
-        delay: 5, 
-        //replaceNull: true,
-		colModel: [{'columnName':'idCiudades','width':'10','label':'ID'}, {'columnName':'Ciudad','width':'60','label':'Estado'},{'columnName':'Paises_Codigo','width':'30','label':'Codigo'}],
-		select: function( event, ui ) {
-			jQuery( "#estado" ).val( ui.item.Ciudad );
-            jQuery( "#estado_id" ).val( ui.item.idCiudades );
-			return false;
-		}
-	});
-}
-
-function autoCompletePaises(){
-    autoComplete();
-    jQuery( "#pais" ).combogrid({
-		url: '../../app/webroot/files/world-pais.php',
-		debug:true,
-        delay: 5, 
-        //replaceNull: true,
-		colModel: [
-                   {'columnName':'Codigo','width':'10','label':'ID'}, 
-                   {'columnName':'Pais','width':'60','label':'Pais'}
-                  ],
-		select: function( event, ui ) {
-			jQuery( "#pais" ).val( ui.item.Pais );
-            jQuery( "#pais_id" ).val( ui.item.Codigo );
-			return false;
-		}
-	});
-}
+//
+//function autoCompleteCiudades(){
+//    jQuery( "#ciudad" ).combogrid({
+//		url: '../../app/webroot/files/world.php',
+//		debug:true,
+//        delay: 5, 
+//        //replaceNull: true,
+//		colModel: [{'columnName':'idCiudades','width':'10','label':'ID'}, {'columnName':'Ciudad','width':'60','label':'Ciudad'},{'columnName':'Paises_Codigo','width':'30','label':'Codigo'}],
+//		select: function( event, ui ) {
+//			jQuery( "#ciudad" ).val( ui.item.Ciudad );
+//            jQuery( "#ciudad_id" ).val( ui.item.idCiudades );
+//			return false;
+//		}
+//	});
+//}
+//
+//function autoCompleteEstados(){
+//    jQuery( "#estado" ).combogrid({
+//		url: '../../app/webroot/files/world.php',
+//		debug:true,
+//        delay: 5, 
+//        //replaceNull: true,
+//		colModel: [{'columnName':'idCiudades','width':'10','label':'ID'}, {'columnName':'Ciudad','width':'60','label':'Estado'},{'columnName':'Paises_Codigo','width':'30','label':'Codigo'}],
+//		select: function( event, ui ) {
+//			jQuery( "#estado" ).val( ui.item.Ciudad );
+//            jQuery( "#estado_id" ).val( ui.item.idCiudades );
+//			return false;
+//		}
+//	});
+//}
+//
+//function autoCompletePaises(){
+//    jQuery( "#pais" ).combogrid({
+//		url: '../../app/webroot/files/world-pais.php?p'+jQuery( "#pais_id" ).val(),
+//		debug:true,
+//        delay: 5, 
+//        //replaceNull: true,
+//		colModel: [
+//                   {'columnName':'Codigo','width':'10','label':'ID'}, 
+//                   {'columnName':'Pais','width':'60','label':'Pais'}
+//                  ],
+//		select: function( event, ui ) {
+//			jQuery( "#pais" ).val( ui.item.Pais );
+//            jQuery( "#pais_id" ).val( ui.item.Codigo );
+//			return false;
+//		}
+//	});
+//}
 
 /*
 function defaultLocalidad(){
@@ -208,3 +185,16 @@ function defaultLocalidad(){
       }
 }
 */
+
+function animatePB(barr,por100)
+{
+    por_act = parseInt(jQuery( "#porciento").val());
+    var por = parseInt(por100) + por_act;
+    jQuery( "#porciento").val(por);
+    
+    jQuery( "#"+barr ).css('width',por+'%');
+}
+function currDistrict()
+{
+    jQuery("#curr_district").val(jQuery("#estado_id option:selected").html());
+}

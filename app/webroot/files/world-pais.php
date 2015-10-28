@@ -6,6 +6,7 @@ $sord = $_GET['sord']; // get the direction
 
 $searchTerm = $_GET['searchTerm'];
 if(!$sidx) $sidx =1;
+
 /*if ($searchTerm=="") {
 	$searchTerm="%";
 } else {
@@ -13,10 +14,9 @@ if(!$sidx) $sidx =1;
 }
 */
 
-
 $dbhost = "localhost";
 $dbuser = "root";
-$dbpassword = "Doncyberiomysql";
+$dbpassword = "";
 $database = "sport_center";
 
 // connect to the database
