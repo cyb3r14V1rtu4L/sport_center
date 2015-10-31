@@ -121,6 +121,20 @@ if(d.valant != d.value){
 	d.valant = val;
 	}
 }
+
+function alphaNumeric(evt)
+{
+   var letra = soloLetras(evt);
+   var numero = soloNumeros(evt);
+   
+   if(letra === false && numero === false)
+   {
+       return false; 
+   }else{
+       return true;
+   }
+}
+
 //
 //function autoCompleteCiudades(){
 //    jQuery( "#ciudad" ).combogrid({
