@@ -3,7 +3,7 @@ e($ajax->form(array("type"=>"post",
                     "options"=>array("id"=>"customers",
                                      "model"=>"Clientes",
                                      "update"=>"divAction",
-                                     "complete"=>"beforeSaveData('alert-warning')",
+                                     //"complete"=>"beforeSaveData('alert-warning')",
                                      "url"=>array("controller"=>"Customer",
                                                   "action"=>"addCustomer"),
                                     )
@@ -215,7 +215,7 @@ e($ajax->form(array("type"=>"post",
               'label'=>'Domicilio',
               'class'=>'form-control',
               'autocomplete' => 'off',
-              'onKeypress'=> 'return soloLetras(event);',
+              'onKeypress'=> 'return alphaNumeric(event);',
               'placeholder'=>'Nombre completo de la calle',
               //"onblur"=>"animatePB('barr_customers',7)"
             
@@ -228,7 +228,7 @@ e($ajax->form(array("type"=>"post",
               'label'=>'No. Exterior',
               'class'=>'form-control',
               'autocomplete' => 'off',
-              'onKeypress'=> 'return soloNumeros(event);',
+              'onKeypress'=> 'return alphaNumeric(event);',
               'maxLength'=>10,
               //"onblur"=>"animatePB('barr_customers',7)"
             )));
@@ -240,7 +240,7 @@ e($ajax->form(array("type"=>"post",
               'label'=>'Colonia',
               'class'=>'form-control',
               'autocomplete' => 'off',
-              'onKeypress'=> 'return soloLetras(event);',
+              'onKeypress'=> 'return alphaNumeric(event);',
               'placeholder'=>'Colonia',
               //"onblur"=>"animatePB('barr_customers',7)"
             )));
