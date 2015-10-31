@@ -38,7 +38,7 @@ class CustomerController extends AppController {
         $fecha_hoy = date("Y-m-d");
         $save =true;
         $messages = array();
-        $msg1 =''; $msg2=''; $msg3='';
+        $msg1 =''; $msg2=''; $msg3='';$msg4='';
         $fecha_sys = $this->data['Clientes']['fecha_nacimiento'];
         if($fecha_hoy < $fecha_sys )
         {
