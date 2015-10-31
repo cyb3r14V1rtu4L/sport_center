@@ -18,17 +18,20 @@ class Clientes extends AppModel
                               )
                          );
     
+    
+    
+    
     var $validate = array(
         'nombre' => array(
-        'rule' => 'notEmpty',
-        'message' => 'Nombre del Cliente.'
+            'rule' => array('minLength', '2'),
+            'message' => 'El nombre del cliente debe contener almenos dos caracteres'
         ),
         
        'apellidos' => array(
-            'rule' => 'notEmpty',
-        'message' => 'Apellido(s) del Cliente.'
+            'rule' => array('minLength', '2'),
+            'message' => 'El apellido del cliente debe contener almenos dos caracteres'
         ),
-        'pais_id' => array(
+       'pais_id' => array(
             'rule' => 'notEmpty',
         'message' => 'Favor de ingresar un País.'
         ),
@@ -44,7 +47,7 @@ class Clientes extends AppModel
         'fecha_nacimiento' => array(
                 'rule' => 'date',
                 'required' => true,
-                'message' => 'Ingrese Fecha de Nacimiento'
+                'message' => 'Ingrese una Fecha de Nacimiento válida'
         ),
     );
 }

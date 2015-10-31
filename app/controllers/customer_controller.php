@@ -62,6 +62,8 @@ class CustomerController extends AppController {
             $save = false;
         }
         
+        
+        
         $dir1 = $this->data['DatosClientes']['calle'];
         $dir2 = $this->data['DatosClientes']['numero'];
         $dir3 = $this->data['DatosClientes']['colonia'];
@@ -76,7 +78,18 @@ class CustomerController extends AppController {
            
             $save = false;
         }
-         array_push($messages, $msg1, $msg2, $msg3);
+        
+        if(strlen($dir4) < 5)
+        {
+            $msg4 ='<div class="alert alert-warning" role="alert">
+                <a class="close" data-dismiss="alert">×</a>
+                <strong>El Código Postal debe ser de 5 caracteres</strong><br/>
+              </div>';
+           
+            $save = false;
+        }
+        
+        array_push($messages, $msg1, $msg2, $msg3, $msg4);
         $this->Clientes->set($this->data['Clientes']);
         if($this->Clientes->validates())
         {
@@ -106,7 +119,7 @@ class CustomerController extends AppController {
             }   
         }else{
                 $this->set('validationErrorsArray', $this->Clientes->invalidFields());
-                e('<div class="alert alert-warning" role="alert">
+                e('<div class="alert alert-danger" role="alert">
                     <a class="close" data-dismiss="alert">×</a>
                     <strong>Ingresar datos requeridos</strong><br/>
                   </div>');
