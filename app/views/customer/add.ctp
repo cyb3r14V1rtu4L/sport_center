@@ -28,11 +28,10 @@ e($ajax->form(array("type"=>"post",
 
   <!-- Nav tabs -->
   <ul class="nav nav-pills nav-stacked" role="tablist">
-    <li role="presentation" class="active"><a href="#grales" aria-controls="home" role="tab" data-toggle="tab">Generales</a></li>
-    <li role="presentation"><a href="#direccion" aria-controls="direccion" role="tab" data-toggle="tab">Dirección</a></li>
-
+    <li role="presentation" class="active" id="tb1"><a href="#grales" aria-controls="home" role="tab" data-toggle="tab">Generales</a></li>
+    <li role="presentation" id="tb2"><a href="#direccion" aria-controls="direccion" role="tab" data-toggle="tab">Dirección</a></li>
   </ul>
-
+  
   <!-- Tab panes -->
   <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="grales" >
@@ -284,3 +283,4 @@ e($ajax->observeField('pais_id',
           "update" => "divEstados"
          )
 ));
+?>

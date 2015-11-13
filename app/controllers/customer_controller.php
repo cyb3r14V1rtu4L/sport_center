@@ -32,13 +32,77 @@ class CustomerController extends AppController {
         $this->set("BUTTON","Registrar");
 	}
     
+    function validateVocal($string,$type)
+    {
+        switch($type)
+        {
+            case 'a':
+                $chars = array('a','e','i','o','u');
+                break;
+            case 'b':
+                $chars = array(
+                               'b','c','d','f',
+                               'g','h','j','k',
+                               'l','m','n','p',
+                               'q','r','s','t',
+                               'v','w','x','y',
+                               'z'
+                              );
+                break;
+            case 'n':
+                $chars = array(
+                               '7','8','9',
+                               '4','5','6',
+                               '1','2','3',
+                                   '0'
+                              );
+                break;
+        }
+        
+        $c=0;
+        foreach($chars as $findme)
+        {
+            $pos = strpos($string, $findme);
+            if ($pos !== false)
+            {
+                $c++;
+            }
+        }
+        return $c;
+    }
+        
     function addCustomer()
     {
         #print_r($this->data);exit();
+        
         $fecha_hoy = date("Y-m-d");
         $save =true;
         $messages = array();
-        $msg1 =''; $msg2=''; $msg3='';$msg4='';
+        $msg1 =''; $msg2=''; $msg3=''; $msg33='';$msg4='';$msg5='';$msg6='';
+        
+        $vocal_nombre =  $this->validateVocal(trim($this->data['Clientes']['nombre']),'a');
+        $conso_nombre =  $this->validateVocal(trim($this->data['Clientes']['nombre']),'b');
+
+        if($vocal_nombre == 0 || $conso_nombre == 0)
+        {
+           $msg5 = '<div class="alert alert-warning" role="alert">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <strong>El Nombre del Cliente parece no tener coherencia.</strong><br/>
+                    </div>';
+           $save = false;
+        }
+        
+        $vocal_apellido =  $this->validateVocal(trim($this->data['Clientes']['apellidos']),'a');
+        $conso_apellido =  $this->validateVocal(trim($this->data['Clientes']['apellidos']),'b');
+        if($vocal_apellido == 0 || $conso_apellido == 0)
+        {
+           $msg6 = '<div class="alert alert-warning" role="alert">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <strong>El (los) Apellido(s) del Cliente parece(n) no tener coherencia.</strong><br/>
+                    </div>';
+           $save = false;
+        }
+        
         $fecha_sys = $this->data['Clientes']['fecha_nacimiento'];
         if($fecha_hoy < $fecha_sys )
         {
@@ -61,19 +125,37 @@ class CustomerController extends AppController {
               </div>';
             $save = false;
         }
-        
-        
-        
+               
         $dir1 = $this->data['DatosClientes']['calle'];
         $dir2 = $this->data['DatosClientes']['numero'];
         $dir3 = $this->data['DatosClientes']['colonia'];
         $dir4 = $this->data['DatosClientes']['cpostal'];
         
-        if($dir1 =='' || $dir2 =='' || $dir3 =='' || $dir4 =='')
+        $dir1 = $this->validateVocal(trim($this->data['DatosClientes']['calle']),'a');
+        $dir11= $this->validateVocal(trim($this->data['DatosClientes']['calle']),'b');
+        
+        $dir3 = $this->validateVocal(trim($this->data['DatosClientes']['colonia']),'a');
+        $dir33= $this->validateVocal(trim($this->data['DatosClientes']['colonia']),'b');
+        
+        
+        $dir22= $this->validateVocal(trim($this->data['DatosClientes']['colonia']),'n');
+        
+        
+        if($dir1 == 0 || $dir11 == 0 || $dir2 == '' || $dir3 =='' || $dir4 =='')
+        {
+            $msg33 ='<div class="alert alert-info" role="alert">
+                <a class="close" data-dismiss="alert">×</a>
+                <strong>Debe ingresar todos los datos del apartado "Dirección" correctamente</strong><br/>
+              </div>';
+           
+            $save = false;
+        }
+        
+        if($dir2 == 0)
         {
             $msg3 ='<div class="alert alert-warning" role="alert">
                 <a class="close" data-dismiss="alert">×</a>
-                <strong>Debe ingresar todos los datos del apartado "Dirección"</strong><br/>
+                <strong>Debe existir un dígito en el campo No. Exterior</strong><br/>
               </div>';
            
             $save = false;
@@ -89,9 +171,15 @@ class CustomerController extends AppController {
             $save = false;
         }
         
-        array_push($messages, $msg1, $msg2, $msg3, $msg4);
+        
+        /**/
+        
+        
+        
+        array_push($messages, $msg1, $msg5, $msg6, $msg2,$msg33, $msg3, $msg4);
         $this->Clientes->set($this->data['Clientes']);
-        if($this->Clientes->validates())
+        $this->DatosClientes->set($this->data['DatosClientes']);
+        if($this->Clientes->validates() && $this->DatosClientes->validates())
         {
             if($save === true){
                 if($this->Clientes->save($this->data['Clientes']))
@@ -107,6 +195,12 @@ class CustomerController extends AppController {
                         e("<script>jQuery('#barr_customers').css('width','100%');</script>");
                         e('<script>document.getElementById("customers").reset();</script>');
                         e("<script>jQuery('#barr_customers').css('width','1%');</script>");
+                        
+                        e("<script>jQuery('#tb1').addClass('active');</script>");
+                        e("<script>jQuery('#tb2').removeClass('active');</script>");
+                        e("<script>jQuery('#grales').addClass('tab-pane active');</script>");
+                        e("<script>jQuery('#direccion').addClass('tab-pane');</script>");
+
                     }
                 }
                 
@@ -117,7 +211,7 @@ class CustomerController extends AppController {
                 }
                 e("<script>jQuery('#barr_customers').css('width','1%');</script>");
             }   
-        }else{
+        }else{                
                 $this->set('validationErrorsArray', $this->Clientes->invalidFields());
                 e('<div class="alert alert-danger" role="alert">
                     <a class="close" data-dismiss="alert">×</a>
@@ -126,6 +220,8 @@ class CustomerController extends AppController {
                 
                 $IvalidFieldes = $this->Clientes->invalidFields();
                 $IvalidFieldes = array_values($IvalidFieldes);
+                
+                
                 $PB = count($IvalidFieldes);
                 foreach($IvalidFieldes as $iF)
                 {
@@ -138,6 +234,22 @@ class CustomerController extends AppController {
                 foreach ($messages as $msgs)
                 {
                     e($msgs);
+                }
+                
+                $this->set('validationErrorsArray', $this->DatosClientes->invalidFields());
+                
+                $IvalidFieldes = $this->DatosClientes->invalidFields();
+                $IvalidFieldes = array_values($IvalidFieldes);
+                
+                
+                $PB = count($IvalidFieldes);
+                foreach($IvalidFieldes as $iF)
+                {
+                    e('<div class="alert alert-warning" role="alert">
+                        <a class="close" data-dismiss="alert">×</a>
+                        <strong>'.$iF.'</strong><br/>
+                      </div>');
+                    e("<script>jQuery('#barr_customers').css('width','$PB%');</script>");
                 }
                 
             }
