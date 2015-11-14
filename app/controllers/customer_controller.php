@@ -76,6 +76,7 @@ class CustomerController extends AppController {
         #print_r($this->data);exit();
         
         $fecha_hoy = date("Y-m-d");
+        $anio_actual = date("Y");
         $save =true;
         $messages = array();
         $msg1 =''; $msg2=''; $msg3=''; $msg33='';$msg4='';$msg5='';$msg6='';
@@ -104,11 +105,16 @@ class CustomerController extends AppController {
         }
         
         $fecha_sys = $this->data['Clientes']['fecha_nacimiento'];
-        if($fecha_hoy < $fecha_sys )
+        $fecha = split("-", $fecha_sys);
+        
+        $edad = $anio_actual - $fecha[0];
+        
+       
+        if($fecha_hoy < $fecha_sys || $edad > 100)
         {
             $msg1 = '<div class="alert alert-warning" role="alert">
                 <a class="close" data-dismiss="alert">×</a>
-                <strong>Fecha incorrecta</strong><br/>
+                <strong>Ingrese una Fecha de Nacimiento válida</strong><br/>
               </div>';
             $save  = false;
         }
@@ -170,12 +176,7 @@ class CustomerController extends AppController {
            
             $save = false;
         }
-        
-        
-        /**/
-        
-        
-        
+       
         array_push($messages, $msg1, $msg5, $msg6, $msg2,$msg33, $msg3, $msg4);
         $this->Clientes->set($this->data['Clientes']);
         $this->DatosClientes->set($this->data['DatosClientes']);
