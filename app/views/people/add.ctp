@@ -42,7 +42,7 @@ e($ajax->form(array("type"=>"post",
                  e($form->input('Personal.personal_id',    
                 array('type'=>'hidden','label'=>false)));
                 e($form->input('Personal.tipo',    
-                array('type'=>'hidden','label'=>false,'value'=>'2')));
+                array('type'=>'hidden','label'=>false,'value'=>$personal)));
                 e($form->input('Personal.nombre',    
                                 array('type'=>'text',
                                       'label'=>'Nombre',
@@ -100,15 +100,28 @@ e($ajax->form(array("type"=>"post",
             </div>   
         
             <div class="form-group col-sm-12 col-md-4">
-                <?php e($form->input('Personal.puesto_id',array
-                    ("id"=>"id_puesto",
-                    "label"=>"Puesto",
-                    "type"=>"select",
-                    "options"=>$Puestos,
-                    "class"=>"form-control",
-                    "default"=>3,
-                    //"onchange"=>"animatePB('barr_customers',7)",
-                    "empty"=>"Seleccionar")));
+                <?php 
+                if($personal == 1)
+                {
+                    e($form->input('Personal.puesto_id',array
+                        ("id"=>"id_puesto",
+                        "label"=>"Puesto",
+                        "type"=>"select",
+                        "options"=>$Puestos,
+                        "class"=>"form-control",
+                        "default"=>3,
+                        //"onchange"=>"animatePB('barr_customers',7)",
+                        "empty"=>"Seleccionar")));
+                }else
+                    {
+                        e($form->input('Personal.puesto_id',array
+                            ("id"=>"id_puesto",
+                            "label"=>false,
+                            "type"=>"hidden",
+                            "class"=>"form-control",
+                            "value"=>"0"
+                            )));
+                    }
                 ?>
             </div>
         </div>
