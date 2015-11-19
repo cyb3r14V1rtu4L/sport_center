@@ -22,7 +22,7 @@ e($ajax->form(array("type"=>"post",
     <?php e($form->input('porciento',array('type'=>'hidden','label'=>false,'id'=>'porciento','value'=>'7')));?>
     <div class="progress">
         <div id='barr_customers' class="progress-bar progress-bar-success" style="width: 1%">
-            <span class="sr-only">45% Complete (success)</span>
+            <span class="sr-only"></span>
         </div>
     </div>  
 
@@ -101,7 +101,7 @@ e($ajax->form(array("type"=>"post",
         
             <div class="form-group col-sm-12 col-md-4">
                 <?php e($form->input('Clientes.categoria_id',array
-                    ("id"=>"id_calle",
+                    ("id"=>"categoria_id",
                     "label"=>"Categoría",
                     "type"=>"select",
                     "options"=>$Categorias,
@@ -283,4 +283,3 @@ e($ajax->observeField('pais_id',
           "update" => "divEstados"
          )
 ));
-?>

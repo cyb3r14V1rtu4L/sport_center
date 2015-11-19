@@ -1,8 +1,9 @@
 <?php
 e($ajax->form(array("type"=>"post",                  
-                    "options"=>array("model"=>"Personal",
+                    "options"=>array("id"=>"customers",
+                                     "model"=>"Personal",
                                      "update"=>"divAction",
-                                     "complete"=>"beforeSaveData('alert-warning')",
+                                     //"complete"=>"beforeSaveData('alert-warning')",
                                      "url"=>array("controller"=>"People",
                                                   "action"=>"addPeople"),
                                     )
@@ -18,33 +19,38 @@ e($ajax->form(array("type"=>"post",
     <h3 class="panel-title"><?php e($ACTION);?></h3>
   </div>
   <div class="panel-body">
-    
+    <?php e($form->input('porciento',array('type'=>'hidden','label'=>false,'id'=>'porciento','value'=>'7')));?>
+    <div class="progress">
+        <div id='barr_customers' class="progress-bar progress-bar-success" style="width: 1%">
+            <span class="sr-only"></span>
+        </div>
+    </div>  
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#grales" aria-controls="home" role="tab" data-toggle="tab">Generales</a></li>
-    <li role="presentation"><a href="#contacto" aria-controls="profile" role="tab" data-toggle="tab">Contacto</a></li>
-    <li role="presentation"><a href="#direccion" aria-controls="direccion" role="tab" data-toggle="tab">Dirección</a></li>
+  <ul class="nav nav-pills nav-stacked" role="tablist">
+    <li role="presentation" class="active" id="tb1"><a href="#grales" aria-controls="home" role="tab" data-toggle="tab">Generales</a></li>
+    <li role="presentation" id="tb2"><a href="#direccion" aria-controls="direccion" role="tab" data-toggle="tab">Dirección</a></li>
   </ul>
-
+  
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="grales">
+      <div role="tabpanel" class="tab-pane active" id="grales" >
         <p>
             <div class="row">
             <div class="form-group col-sm-12 col-md-6">
                 <?php 
-                e($form->input('Personal.personal_id',    
+                 e($form->input('Personal.personal_id',    
                 array('type'=>'hidden','label'=>false)));
                 e($form->input('Personal.tipo',    
-                array('type'=>'hidden','label'=>false,'value'=>$personal)));
+                array('type'=>'hidden','label'=>false,'value'=>'2')));
                 e($form->input('Personal.nombre',    
                                 array('type'=>'text',
                                       'label'=>'Nombre',
                                       'class'=>'form-control',
                                       'autocomplete' => 'off',
-                                      'placeholder'=>'Nombre',
-                                      'error' => array('notempty' => __('This field cannot be empty', true))
+                                      'onKeypress'=> 'return soloLetras(event);',
+                                      'placeholder'=>'Nombre del Personal',
+                                      //'onblur'=>"animatePB('barr_customers',7)"
                                      )));
                 ?>
             </div>
@@ -55,13 +61,16 @@ e($ajax->form(array("type"=>"post",
                       'label'=>'Apellidos Paterno | Materno',
                       'class'=>'form-control',
                       'autocomplete' => 'off',
-                      'placeholder'=>'Apellido(s)')));
+                      'onKeypress'=> 'return soloLetras(event);',
+                      'placeholder'=>'Apellidos del Personal',
+                      //'onblur'=>"animatePB('barr_customers',7)"
+                    )));
                 ?>
             </div>
              
             </div>
             <div class="row">
-            <div class="form-group col-sm-6 col-md-3">
+            <div class="form-group col-sm-12 col-md-4">
                 <?php e($form->input('Personal.fecha_nacimiento',    
                 array('id'=>'fecha_nacimiento',
                       'type'=>'text',
@@ -69,118 +78,208 @@ e($ajax->form(array("type"=>"post",
                       'class'=>'form-control',
                       'placeholder'=>'AAAA-MM-DD',
                       'autocomplete' => 'off',
+                      'onkeypress'=>"mascara(this,'-',fechas,true);",
                       'onClick'=>'dateBurn(this.id,\'Y-m-d\');',
+                      'onBlur'=>'dateBurn(this.id,\'Y-m-d\');',
+                      'maxLength'=>10,
+                      //'onblur'=>"animatePB('barr_customers',7)"
                       )));
                 ?>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="form-groupcol-sm-12 col-md-4">
                 <?php e($form->input('Personal.genero',array
                     ("id"=>"genero",
                     "label"=>"Género",
                     "type"=>"select",
                     "options"=>$Generos,
                     "class"=>"form-control",
+                    "default"=>"M",
+                    //"onchange"=>"animatePB('barr_customers',7)",
                     "empty"=>"Seleccionar")));
                 ?>
             </div>   
         
-            <div class="col-sm-6 col-md-3">
+            <div class="form-group col-sm-12 col-md-4">
                 <?php e($form->input('Personal.puesto_id',array
-                    ("id"=>"id_calle",
+                    ("id"=>"id_puesto",
                     "label"=>"Puesto",
                     "type"=>"select",
                     "options"=>$Puestos,
                     "class"=>"form-control",
+                    "default"=>7,
+                    //"onchange"=>"animatePB('barr_customers',7)",
                     "empty"=>"Seleccionar")));
+                ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-12 col-md-4">
+                <?php 
+                e($form->input('DatosPersonal.datos_id',    
+                array('type'=>'hidden','label'=>false)));
+                e($form->input('DatosPersonal.personal_id',    
+                array('type'=>'hidden','label'=>false)));
+                e($form->input('DatosPersonal.tel_fijo',    
+                array('type'=>'text',
+                      'label'=>'Teléfono Fijo',
+                      'autocomplete' => 'off',
+                      'class'=>'form-control',
+                      //'onblur'=>"animatePB('barr_customers',7)",
+                      'onkeypress'=>"mascara(this,'-',telefono,true);",
+                      'placeholder'=>'000-000-00000','maxLength'=>12)));
+                ?>
+            </div>
+            <div class="form-group col-sm-12 col-md-4">
+                <?php e($form->input('DatosPersonal.tel_movil',    
+                array('type'=>'text',
+                      'label'=>'Teléfono Celular',
+                      'autocomplete' => 'off',
+                      'class'=>'form-control',
+                      'onfocus'=>'maskMovil(this.id);',
+                      //'onblur'=>"animatePB('barr_customers',7)",
+                      'onkeypress'=>"mascara(this,'-',telefono,true);",
+                      'placeholder'=>'000-000-00000','maxLength'=>12)));
+                ?>
+            </div>
+            <div class="form-group col-sm-12 col-md-4">
+                <?php e($form->input('DatosPersonal.correo',    
+                array('type'=>'text',
+                      'label'=>'Correo Electrónico',
+                      'class'=>'form-control',
+                      'autocomplete' => 'off',
+                      //'onblur'=>"animatePB('barr_customers',7)",
+                      'placeholder'=>'correo@proveedor.org')));
                 ?>
             </div>
         </div>
         </p>
     </div>
-    <div role="tabpanel" class="tab-pane" id="contacto">
-        <p>
-        <div class="form-group">
-            <?php 
-            e($form->input('DatosPersonal.datos_id',    
-            array('type'=>'hidden','label'=>false)));
-            e($form->input('DatosPersonal.cliente_id',    
-            array('type'=>'hidden','label'=>false)));
-            e($form->input('DatosPersonal.tel_fijo',    
-            array('type'=>'text',
-                  'label'=>'Teléfono Fijo',
-                  'autocomplete' => 'off',
-                  'class'=>'form-control',
-                  'placeholder'=>'(000)-000000000')));
-            ?>
-        </div>
-        <div class="form-group">
-            <?php e($form->input('DatosPersonal.tel_movil',    
-            array('type'=>'text',
-                  'label'=>'Teléfono Celular',
-                  'autocomplete' => 'off',
-                  'class'=>'form-control',
-                  'placeholder'=>'(000)-000000000')));
-            ?>
-        </div>
-        <div class="form-group">
-            <?php e($form->input('DatosPersonal.correo',    
-            array('type'=>'text',
-                  'label'=>'Correo Electrónico',
-                  'class'=>'form-control',
-                  'autocomplete' => 'off',
-                  'placeholder'=>'correo@proveedor.org')));
-            ?>
-        </div>
-        </p>
-    </div>
+    
     <div role="tabpanel" class="tab-pane" id="direccion">
         <p>
-        <div class="form-group">
+        <div class="row">   
+        <div class="form-group col-sm-12 col-md-4">
+        <?php 
+        
+        e($form->input('DatosPersonal.pais_id',array
+                    ("id"=>"pais_id",
+                    "label"=>'País',
+                    "type"=>"select",
+                    "options"=>$Paises,
+                    "class"=>"form-control",
+                    "default"=>"MEX",
+                    "empty"=>"Seleccionar",
+                    //"onchange"=>"animatePB('barr_customers',7)"
+                    )));
+        ?>
+        </div>   
+        <div class="form-group col-sm-12 col-md-4">
+            <div id ="divEstados">
+            <?php 
+            e($form->input('DatosPersonal.estado_id',array
+                    ("id"=>"estado_id",
+                    "label"=>'Estado',
+                    "type"=>"select",
+                    "options"=>$Estados,
+                    "class"=>"form-control",
+                    "default"=>"Veracruz",
+                    "empty"=>"Seleccionar",
+                    //"onchange"=>"animatePB('barr_customers',7)"
+                    )));
+            ?>
+            </div>
+        </div>   
+        <div class="form-group col-sm-12 col-md-4">
+            <div id ="divCiudades">
+                <?php 
+                e($form->input('DatosPersonal.ciudad_id',array
+                        ("id"=>"ciudad_id",
+                        "label"=>'Ciudad',
+                        "type"=>"select",
+                        "options"=>$Ciudades,
+                        "class"=>"form-control",
+                        "default"=>"Xalapa Enriquez",
+                        "empty"=>"Seleccionar",
+                        //"onchange"=>"animatePB('barr_customers',7)"
+                        )));
+                ?>
+            </div>
+        </div>
+         
+        </div>
+        <div class="row">
+        <div class="form-group col-sm-12 col-md-9">
         <?php e($form->input('DatosPersonal.calle',    
         array('type'=>'text',
               'label'=>'Domicilio',
               'class'=>'form-control',
               'autocomplete' => 'off',
-              'placeholder'=>'Calle y número'
+              'onKeypress'=> 'return alphaNumeric(event);',
+              'placeholder'=>'Nombre completo de la calle',
+              //"onblur"=>"animatePB('barr_customers',7)"
+            
             )));
         ?>
         </div>
-        <div class="form-group">
+        <div class="form-group col-sm-12 col-md-3">
+        <?php e($form->input('DatosPersonal.numero',    
+        array('type'=>'text',
+              'label'=>'No. Exterior',
+              'class'=>'form-control',
+              'autocomplete' => 'off',
+              'onKeypress'=> 'return alphaNumeric(event);',
+              'maxLength'=>10,
+              //"onblur"=>"animatePB('barr_customers',7)"
+            )));
+        ?>
+        </div>
+        <div class="form-group  col-sm-12 col-md-9">
         <?php e($form->input('DatosPersonal.colonia',    
         array('type'=>'text',
               'label'=>'Colonia',
               'class'=>'form-control',
               'autocomplete' => 'off',
-              'placeholder'=>'Colonia'
+              'onKeypress'=> 'return alphaNumeric(event);',
+              'placeholder'=>'Colonia',
+              //"onblur"=>"animatePB('barr_customers',7)"
             )));
         ?>
         </div>
-        <div class="form-group">
+        <div class="form-group col-sm-12 col-md-3">
         <?php e($form->input('DatosPersonal.cpostal',    
-        array('type'=>'text',
+        array(
+              'id' => 'cpostal',
+              'type'=>'text',
               'label'=>'Código Postal',
               'class'=>'form-control',
               'autocomplete' => 'off',
-              'placeholder'=>'12345',
-              'maxLength'=>5
+              'onKeypress'=> 'return soloNumeros(event);',
+              'maxLength'=>5,
+              //"onblur"=>"animatePB('barr_customers',7)"
             )));
         ?>
         </div>
+        </div>
+        
         </p> 
       </div>
-  </div>
+      
+</div>
   
 </div>   
 </div>
 <div class="form-group">
-    <button id="saveData" type="submit" class="btn btn-info pull-right">
+    <button id="saveData" type="submit" onclick="animatePB('barr_customers',100)" class="btn btn-info pull-right">
         Registrar
     </button>
 </div>
 <?php 
+
 e($form->end());
-
-?>
-<script>
-
-</script>
+e($ajax->observeField('pais_id',
+    array("url"=>array("controller"=>"Events",
+                       "action"=>"getEstados"
+                       ),
+          "update" => "divEstados"
+         )
+));
