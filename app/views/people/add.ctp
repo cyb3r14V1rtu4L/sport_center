@@ -106,7 +106,7 @@ e($ajax->form(array("type"=>"post",
                     "type"=>"select",
                     "options"=>$Puestos,
                     "class"=>"form-control",
-                    "default"=>7,
+                    "default"=>3,
                     //"onchange"=>"animatePB('barr_customers',7)",
                     "empty"=>"Seleccionar")));
                 ?>
