@@ -11,9 +11,11 @@ class EventsController extends AppController {
         $this->set("Paises",$this->Paises->find("list",array("fields"=>array("Code","Name","order" => "Name"))));
 	}
     
-    function getEstados($id=NULL)
+    function getEstados($model='Model',$id=NULL)
     {
-        $id = $this->data['DatosClientes']['pais_id'];
+        
+        $id = ($id == NULL) ? $this->data[$model]['pais_id'] : $id;
+        
         $this->set("Estados",$this->Estados->find("list",array("fields"=>array("Name","Name"),
                                                   "conditions"=>array("Country"=>$id),
                                                   "order" => "Name"
