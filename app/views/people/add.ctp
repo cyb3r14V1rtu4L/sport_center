@@ -291,8 +291,8 @@ e($ajax->form(array("type"=>"post",
 e($form->end());
 e($ajax->observeField('pais_id',
     array("url"=>array("controller"=>"Events",
-                       "action"=>"getEstados"
-                       ),
+                       "action"=>"getEstados",
+                       "DatosPersonal"),
           "update" => "divEstados"
          )
 ));
