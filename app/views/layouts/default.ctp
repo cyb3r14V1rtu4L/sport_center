@@ -20,7 +20,7 @@ date_default_timezone_set('America/Mexico_City');
         e($this->Html->css('sticky.full'));
         e($this->Html->css('smoothness/jquery-ui-1.10.1.custom.css'));
         e($this->Html->css('smoothness/jquery.ui.combogrid.css'));
-        
+        e($this->Html->css('toggle'));
     ?>
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>

@@ -12,7 +12,7 @@ class ServicesController extends AppController {
         $this->set("Categorias",$this->Categorias->find("list",array("fields"=>array("categoria_id","nombre"))));
         $Generos = array(""=>"","F"=>"F","M"=>"M");
         $this->set("Generos",$Generos);
-        $this->set("personal",$personal);
+        #$this->set("personal",$personal);
         $this->set("ACTION",$title);
         $this->set("BUTTON","Registrar");
 	}
@@ -23,7 +23,12 @@ class ServicesController extends AppController {
         
         if($palabra !=='')
         {
-           $OR = array("Clientes.nombre LIKE","Clientes.apellidos LIKE","Clientes.folio  LIKE");
+           $OR = array(
+                        "Clientes.nombre LIKE",
+                        "Clientes.apellidos LIKE",
+                        "Clientes.folio  LIKE",
+                        "Categorias.descripcion LIKE"
+                      );
            $palabra = explode(" ",$palabra);
            $o_r = '';
            $x=0;

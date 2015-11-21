@@ -15,8 +15,16 @@ class Clientes extends AppModel
                               (
                               'className'  => 'StatusElemento',
                               'foreignKey' => 'status_id',
-                              )
+                              ),
+                        
                          );
+    var $hasMany = array(
+                        'Asistencias' => array
+                              (
+                              'className'  => 'Asistencias',
+                              'foreignKey' => 'cliente_id',
+                              )
+    );
     
     
     
