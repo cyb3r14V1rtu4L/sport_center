@@ -12,7 +12,7 @@ class WitnessController extends AppController {
         $this->set("title_for_layout",$title);
         $this->set("Categorias",$this->Categorias->find("list",array("fields"=>array("categoria_id","nombre"))));
         $conditions = array("Clientes.status_id"=>1);
-        $this->set("Clientes",$this->Clientes->find("all",array("conditions"=>$conditions,"order"=>array("Clientes.nombre","Clientes.categoria_id"))));
+        $this->set("Clientes",$this->Clientes->find("all",array("conditions"=>$conditions,"order"=>array("Clientes.categoria_id","Clientes.nombre"))));
         $Generos = array(""=>"","F"=>"F","M"=>"M");
         $this->set("Generos",$Generos);
         $this->set("ACTION",$title);
@@ -47,10 +47,10 @@ class WitnessController extends AppController {
                 $o_r = rtrim($o_r,"OR ");
                 $o_r = explode("OR",$o_r);
                 $conditions['OR'] = $o_r; 
-                $this->set("Clientes",$this->Clientes->find("all",array("conditions"=>$conditions,"order"=>array("Clientes.nombre","Clientes.categoria_id"))));
+                $this->set("Clientes",$this->Clientes->find("all",array("conditions"=>$conditions,"order"=>array("Clientes.categoria_id","Clientes.nombre"))));
            }else
                {
-                    $this->set("Clientes",$this->Clientes->find("all",array("order"=>array("Clientes.nombre","Clientes.categoria_id"))));
+                    $this->set("Clientes",$this->Clientes->find("all",array("order"=>array("Clientes.categoria_id","Clientes.nombre"))));
                }
         }else{
              e('<div class="alert alert-warning" role="alert">
