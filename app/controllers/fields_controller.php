@@ -7,7 +7,9 @@ class FieldsController extends AppController {
     var $uses = array("Espacios");
     
     function add($action){
-        $this->set("ACTION","Alta Espacios");  
+        $this->set("ACTION","Alta Espacios");
+        $this->search();
+        $this->render("search");
 	}
     
     function search() {

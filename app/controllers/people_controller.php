@@ -256,7 +256,9 @@ class PeopleController extends AppController {
                 }
                 
             }
-                 
-        
     }
+    
+    function search() {
+
+	}
 }

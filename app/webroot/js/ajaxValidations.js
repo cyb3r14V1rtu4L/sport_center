@@ -1,6 +1,5 @@
 
 function beforeSaveData(classs){
-	
     jQuery(document).ready(function() {
 	    setTimeout(function() {
             

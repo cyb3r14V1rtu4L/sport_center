@@ -96,4 +96,10 @@ class WitnessController extends AppController {
         
     }
     
+    
+	function search() {
+        $this->add(1);
+        $this->render("add");
+	}
+    
 }
