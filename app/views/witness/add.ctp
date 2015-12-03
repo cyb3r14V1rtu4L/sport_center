@@ -1,6 +1,6 @@
 <?php
 e($ajax->form(array("type"=>"post",                  
-                    "options"=>array("model"=>"CobroServicios",
+                    "options"=>array("model"=>"Asistencias",
                                      "update"=>"divList",
                                      "url"=>array("controller"=>"Witness",
                                                   "action"=>"searchCustomer"),

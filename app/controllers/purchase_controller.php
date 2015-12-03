@@ -16,4 +16,8 @@ class PurchaseController extends AppController {
         $this->set("ACTION",$title);
         $this->set("BUTTON","Registrar");
 	}
+    
+    function search() {
+
+	}
 }

@@ -81,7 +81,7 @@ input.sw:checked + label {
 /* Pen Style */
 body {
   padding: 30px 0;
-  text-align: center;
+  //text-align: center;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;
   background: #F4F4F4;

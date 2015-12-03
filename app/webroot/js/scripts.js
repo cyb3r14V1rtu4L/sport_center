@@ -28,6 +28,20 @@ function dateBurn(id,f)
        }); 
 }
 
+function dateGroups(id,f)
+{
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    jQuery('#'+id).datetimepicker({
+        lang:'es',
+        timepicker:false,
+        startDate:	currentTime,
+        format:f,
+        formatDate:f,
+        defaultDate:jQuery('#'+id).val()
+       }); 
+}
+
 function soloNumeros(evt)
 {
     var charCode = (evt.which) ? evt.which : event.keyCode

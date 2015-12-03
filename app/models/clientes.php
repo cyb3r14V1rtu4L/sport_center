@@ -23,6 +23,11 @@ class Clientes extends AppModel
                               (
                               'className'  => 'Asistencias',
                               'foreignKey' => 'cliente_id',
+                              ),
+                        'Grupos' => array
+                              (
+                              'className'  => 'GruposClientes',
+                              'foreignKey' => 'cliente_id',
                               )
     );
     

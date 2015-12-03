@@ -1,6 +1,7 @@
 <?php
 e($ajax->form(array("type"=>"post",                  
-                    "options"=>array("id"=>"trujillo",
+                    "options"=>array(
+                                     "id"=>"trujillo",
                                      "model"=>"Trujillo",
                                      "update"=>"divAction",
                                      "complete"=>"beforeSaveData('alert-warning')",
@@ -23,28 +24,27 @@ e($ajax->form(array("type"=>"post",
     <div class="row">
         <div class="form-group col-sm-12 col-md-12">
             <div class="row">
-            <div class="form-group col-sm-12 col-md-12">
-                <?php 
-                
-                e($form->input('Trujillo.titulo',    
-                                array('type'=>'text',
-                                      'label'=>'Título',
-                                      'class'=>'form-control',
-                                      'autocomplete' => 'off',
-                                     )));
-                ?>
-            </div>
-        
-            <div class="form-group col-sm-12 col-md-12">
-                <?php e($form->input('Trujillo.observacion',    
-                array('type'=>'textArea',
-                      'label'=>'Observación',
-                      'class'=>'form-control',
-                      'autocomplete' => 'off',
-                      )));
-                ?>
-            </div>
-             
+                <div class="form-group col-sm-12 col-md-12">
+                    <?php 
+
+                    e($form->input('Trujillo.titulo',    
+                                    array('type'=>'text',
+                                          'label'=>'Título',
+                                          'class'=>'form-control',
+                                          'autocomplete' => 'off',
+                                         )));
+                    ?>
+                </div>
+
+                <div class="form-group col-sm-12 col-md-12">
+                    <?php e($form->input('Trujillo.observacion',    
+                    array('type'=>'textArea',
+                          'label'=>'Observación',
+                          'class'=>'form-control',
+                          'autocomplete' => 'off',
+                          )));
+                    ?>
+                </div>
             </div>
         </div>
     </div>
@@ -75,7 +75,6 @@ e($form->end());
                 e($this->element('show_notes', array('Observaciones' => $Observaciones)));
             ?>    
       </div>
-     
     </div>
   </div>
 </div>
