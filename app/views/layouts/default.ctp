@@ -279,14 +279,10 @@ require(['jquery', 'bootstrap','scripts','datepicker','Sticky','masked','jquery'
 });
 
 function exitSportCenter(){
-    var r = confirm("Press a button");
+    var r = confirm("¿Realmente Desea Salir SICDI?");
     if (r === true)
     {
-        x = "You pressed OK!";
        window.location = '/sicdi/users/logout';
-    }else
-    {
-        x = "You pressed Cancel!";
-    } 
+    }
 }
 </script>
