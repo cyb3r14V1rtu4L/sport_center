@@ -141,7 +141,7 @@ date_default_timezone_set('America/Mexico_City');
                         if(isset($_SESSION['Auth']['User']['id']))
                         {
                         ?>
-                            <li><a href="<?php e($this->webroot.'menu/index/1')?>" class=""><?php e($html->image("add.png",array('width'=>'28px','height'=>'28px')));?></a></li>
+                            <li><a href="<?php e($this->webroot.'menu/index/1')?>"><?php e($html->image("add.png",array('width'=>'28px','height'=>'28px')));?></a></li>
                             <li><a href="<?php e($this->webroot.'menu/index/2')?>"><?php e($html->image("search.png",array('width'=>'28px','height'=>'28px')));?></a></li>
                             <li><a href="<?php e($this->webroot.'menu/index/3')?>"><?php e($html->image("delete.png",array('width'=>'28px','height'=>'28px')));?></a></li>
                             <li><a href="<?php e($this->webroot.'trujillo/add/1')?>"><?php e($html->image("obs.png",array('width'=>'28px','height'=>'28px')));?></a></li>
@@ -159,8 +159,9 @@ date_default_timezone_set('America/Mexico_City');
                         <?php
                         }else{
                             ?>
-                            <li><a href="<?php e($this->webroot.'Users/'.$link)?>"  data-toggle="tooltip" title="Cerrar Sesión"><?php e($html->image("logout.png",array('width'=>'28px','height'=>'28px')));?></a></li>
+                      <li><a href="#" onclick="exitSportCenter()" data-toggle="tooltip" title="Cerrar Sesión"><?php e($html->image("logout.png",array('width'=>'28px','height'=>'28px')));?></a></li>
                             <?php
+                            
                         }
                         ?>
                        
@@ -195,18 +196,18 @@ date_default_timezone_set('America/Mexico_City');
                         </ol>
                         <div class="carousel-inner" style="max-height:475px; overflow:hidden;">
                           <?php
-			  $x=0;
-                          foreach($arrIMG as $img)
-                          {
-                            $id_wall  = 'wall_'.$img.'.jpg';
-                            $active = ($x==0) ? ' active ' : '' ;
-                           ?>
-                          <div class="item <?php e($active)?>" style="max-width: 100%; height: auto;">
-                            <img alt="Centro Deportivo Insurgentes" src="<?php e($this->webroot."img/walls/$id_wall");?>">
-                          </div>
-                          <?php
-				$x++;
-                          }
+                            $x=0;
+                            foreach($arrIMG as $img)
+                            {
+                                $id_wall  = 'wall_'.$img.'.jpg';
+                                $active = ($x==0) ? ' active ' : '' ;
+                            ?>
+                            <div class="item <?php e($active)?>" style="max-width: 100%; height: auto;">
+                              <img alt="Centro Deportivo Insurgentes" src="<?php e($this->webroot."img/walls/$id_wall");?>">
+                            </div>
+                            <?php
+                            $x++;
+                            }
                           ?>
                         </div>
 
@@ -276,4 +277,12 @@ require(['jquery', 'bootstrap','scripts','datepicker','Sticky','masked','jquery'
         });
     });
 });
+
+function exitSportCenter(){
+    var r = confirm("¿Realmente Desea Salir SICDI?");
+    if (r === true)
+    {
+       window.location = '/sicdi/users/logout';
+    }
+}
 </script>
