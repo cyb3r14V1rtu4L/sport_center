@@ -13,6 +13,12 @@ function loginForm()
     jQuery('#log_in_panel').slideDown(3000);
 }
 
+function historialForm()
+{
+    preAction("#divObserva","#username");
+    jQuery('#log_in_panel').slideDown(3000);
+}
+
 function dateBurn(id,f)
 {
     var currentTime = new Date();
