@@ -69,10 +69,3 @@ foreach($Observaciones as $observacion)
 
 e($form->end());
 ?>
-<div class="row">
-    <div class="form-group">
-        <button id="saveData" type="submit" class="btn btn-info pull-right">
-            Actualizar
-        </button>
-    </div>
-</div>
