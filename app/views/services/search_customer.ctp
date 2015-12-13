@@ -14,7 +14,7 @@
                 <tr />
                   <th />Nombre
                   <th />Apellido(s)
-                  <th colspan="2" style="text-align: center" />Categoria
+                  <th colspan="2" style="text-align: center" />Categoría
                   <th />Status
             </thead>
             <tbody>
