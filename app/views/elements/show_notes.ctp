@@ -11,9 +11,7 @@ e($ajax->form(array("type"=>"post",
              )
  );
 ?>
-<div class="row-fluid">
-    <?php e($html->div('', null, array('id' => 'divActionO')));?>
-</div>
+
 <?php 
 $x=0;
 $panel = ' ';
@@ -24,14 +22,15 @@ foreach($Observaciones as $observacion)
 <div class="panel panel-default <?php e($panel);?>">
   <div class="panel-heading">
     <h3 class="panel-title">
-    <?php 
-    e($form->input('Trujillo.'.$x.'.observacion_id',    
-        array('type'=>'hidden','label'=>false,'value'=>$observacion['Trujillo']['observacion_id'])));
-    e($observacion['Trujillo']['titulo'].' - '.$observacion['Trujillo']['fecha']);
-    ?></h3>
+        <?php 
+        e($form->input('Trujillo.'.$x.'.observacion_id',    
+            array('type'=>'hidden','label'=>false,'value'=>$observacion['Trujillo']['observacion_id'])));
+        e($observacion['Trujillo']['titulo'].' - '.$observacion['Trujillo']['fecha']);
+        ?>
+    </h3>
   </div>
   <div class="panel-body">
-    <div class="row">
+    <div class="row ">
         <div class="form-group col-sm-12 col-md-12">
             <?php 
                 e($form->input('Trujillo.'.$x.'.observacion',    
@@ -70,10 +69,3 @@ foreach($Observaciones as $observacion)
 
 e($form->end());
 ?>
-<div class="row">
-    <div class="form-group">
-        <button id="saveData" type="submit" class="btn btn-info pull-right">
-            Actualizar
-        </button>
-    </div>
-</div>

@@ -36,7 +36,7 @@ class TrujilloController extends AppController {
             }
         }else{
                 $this->set('validationErrorsArray', $this->Trujillo->invalidFields());
-                e('<div class="alert alert-warning" role="alert">
+                e('<div class="alert alert-danger" role="alert">
                                 <a class="close" data-dismiss="alert">×</a>
                                 <strong>Ingresar datos requeridos</strong><br/>
                               </div>');
@@ -51,6 +51,7 @@ class TrujilloController extends AppController {
                 }
                 
             }
+        $this->showNotes();
     }
     
     function showNotes()
@@ -64,7 +65,7 @@ class TrujilloController extends AppController {
                             'Trujillo.status'=>'0'
                             );
 
-        $this->set("Observaciones",  $this->Trujillo->find("all",array("conditions"=>$conditions)));
+        $this->set("Observaciones",  $this->Trujillo->find("all",array("conditions"=>$conditions,"order"=>"Trujillo.observacion_id DESC")));
     }
     
     function updateObservaciones()
